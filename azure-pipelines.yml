@@ -41,16 +41,6 @@ stages:
               provider: 'azurerm'
               command: 'validate'
 
-          - task: TerraformTaskV4@4
-            displayName: 'Terraform Format Check'
-            inputs:
-              provider: 'azurerm'
-              command: 'custom'
-              commandOptions: '-check -recursive'
-              outputTo: 'console'
-              customCommand: 'fmt'
-              environmentServiceNameAzureRM: 'svcconn-devops-mi'
-
   - stage: Plan
     displayName: 'Terraform Plan'
     dependsOn: Validate
