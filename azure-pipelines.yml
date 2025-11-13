@@ -29,7 +29,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              backendServiceArm: 'Azure-ServiceConnection'
+              backendServiceArm: 'svcconn-devops-mi'
               backendAzureRmResourceGroupName: 'terraform-state-rg'
               backendAzureRmStorageAccountName: 'tfstateaccount'
               backendAzureRmContainerName: 'tfstate'
@@ -67,7 +67,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              backendServiceArm: 'Azure-ServiceConnection'
+              backendServiceArm: 'svcconn-devops-mi'
               backendAzureRmResourceGroupName: 'terraform-state-rg'
               backendAzureRmStorageAccountName: 'tfstateaccount'
               backendAzureRmContainerName: 'tfstate'
@@ -79,7 +79,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               commandOptions: '-out=tfplan'
-              environmentServiceNameAzureRM: 'Azure-ServiceConnection'
+              environmentServiceNameAzureRM: 'svcconn-devops-mi'
 
           - task: PublishPipelineArtifact@1
             displayName: 'Publish Terraform Plan'
@@ -116,7 +116,7 @@ stages:
                   inputs:
                     provider: 'azurerm'
                     command: 'init'
-                    backendServiceArm: 'Azure-ServiceConnection'
+                    backendServiceArm: 'svcconn-devops-mi'
                     backendAzureRmResourceGroupName: 'terraform-state-rg'
                     backendAzureRmStorageAccountName: 'tfstateaccount'
                     backendAzureRmContainerName: 'tfstate'
@@ -128,4 +128,4 @@ stages:
                     provider: 'azurerm'
                     command: 'apply'
                     commandOptions: 'tfplan'
-                    environmentServiceNameAzureRM: 'Azure-ServiceConnection'
+                    environmentServiceNameAzureRM: 'svcconn-devops-mi'
