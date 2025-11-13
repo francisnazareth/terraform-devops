@@ -84,6 +84,13 @@ stages:
               artifact: 'tfplan'
               publishLocation: 'pipeline'
 
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Terraform Lock File'
+            inputs:
+              targetPath: '$(System.DefaultWorkingDirectory)/.terraform.lock.hcl'
+              artifact: 'terraform-lock'
+              publishLocation: 'pipeline'
+
   - stage: Apply
     displayName: 'Terraform Apply'
     dependsOn: Plan
@@ -100,6 +107,12 @@ stages:
                   displayName: 'Download Terraform Plan'
                   inputs:
                     artifact: 'tfplan'
+                    path: '$(System.DefaultWorkingDirectory)'
+
+                - task: DownloadPipelineArtifact@2
+                  displayName: 'Download Terraform Lock File'
+                  inputs:
+                    artifact: 'terraform-lock'
                     path: '$(System.DefaultWorkingDirectory)'
 
                 - task: TerraformInstaller@1
