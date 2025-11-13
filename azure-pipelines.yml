@@ -11,6 +11,10 @@ variables:
     value: '1.9.0'
   - name: ARM_USE_OIDC
     value: 'true'
+  - name: RESOURCE_GROUP_NAME
+    value: 'rg-terraform-demo'
+  - name: LOCATION
+    value: 'eastus'
 
 stages:
   - stage: Validate
@@ -70,7 +74,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              commandOptions: '-out=tfplan'
+              commandOptions: '-out=tfplan -var="resource_group_name=$(RESOURCE_GROUP_NAME)" -var="location=$(LOCATION)"'
               environmentServiceNameAzureRM: 'svcconn-devops-mi'
 
           - task: PublishPipelineArtifact@1
