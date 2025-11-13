@@ -46,8 +46,10 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'custom'
-              customCommand: 'fmt'
               commandOptions: '-check -recursive'
+              outputTo: 'console'
+              customCommand: 'fmt'
+              environmentServiceNameAzureRM: 'svcconn-devops-mi'
 
   - stage: Plan
     displayName: 'Terraform Plan'
